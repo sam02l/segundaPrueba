@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datacenter SecurIA - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+</head>
+<body>
+    <header>
+        <h1>🔐 Datacenter SecurIA</h1>
+        <span id="status-cloud" class="badge online">Conectado Nube</span>
+    </header>
+
+    <main class="dashboard">
+        <section id="panel-alerta" class="alert-card hidden">
+            <h2>⚠️ ¡ALERTA DE INTRUSO!</h2>
+            <p>Se han detectado 3 intentos fallidos de huella en el sitio.</p>
+            <button id="btn-desbloquear" class="btn-danger">Desactivar Bloqueo</button>
+        </section>
+
+        <section class="grid-sensores">
+            <div class="card">
+                <h3>🌡️ Temperatura</h3>
+                <p class="valor"><span id="lbl-temp">--</span>°C</p>
+                <div class="status-bar" id="bar-temp"></div>
+            </div>
+            <div class="card">
+                <h3>💧 Humedad</h3>
+                <p class="valor"><span id="lbl-hum">--</span>%</p>
+                <div class="status-bar" id="bar-hum"></div>
+            </div>
+            <div class="card">
+                <h3>💨 Calidad de Aire (Gas)</h3>
+                <p class="valor"><span id="lbl-gas">--</span> PPM</p>
+                <span id="badge-gas" class="badge-status">Cargando...</span>
+            </div>
+        </section>
+
+        <section class="card control-card">
+            <h3>Acceso Remoto Forzado</h3>
+            <p>Abre el Rack de manera remota omitiendo temporalmente los factores biométricos.</p>
+            <button id="btn-abrir" class="btn-success">🔓 Forzar Apertura</button>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
