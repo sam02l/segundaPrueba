@@ -22,29 +22,54 @@
             <button id="btn-desbloquear" class="btn-danger">Desactivar Bloqueo</button>
         </section>
 
-        <section class="grid-sensores">
-            <div class="card">
-                <h3>🌡️ Temperatura</h3>
-                <p class="valor"><span id="lbl-temp">--</span>°C</p>
-                <div class="status-bar" id="bar-temp"></div>
-            </div>
-            <div class="card">
-                <h3>💧 Humedad</h3>
-                <p class="valor"><span id="lbl-hum">--</span>%</p>
-                <div class="status-bar" id="bar-hum"></div>
-            </div>
-            <div class="card">
-                <h3>💨 Calidad de Aire (Gas)</h3>
-                <p class="valor"><span id="lbl-gas">--</span> PPM</p>
-                <span id="badge-gas" class="badge-status">Cargando...</span>
-            </div>
-        </section>
+        <div class="grid-layout">
+            <section class="grid-sensores">
+                <div class="card">
+                    <h3>🌡️ Temperatura</h3>
+                    <p class="valor"><span id="lbl-temp">--</span>°C</p>
+                </div>
+                <div class="card">
+                    <h3>💧 Humedad</h3>
+                    <p class="valor"><span id="lbl-hum">--</span>%</p>
+                </div>
+                <div class="card">
+                    <h3>💨 Gas (Calidad Aire)</h3>
+                    <p class="valor"><span id="lbl-gas">--</span></p>
+                    <span id="badge-gas" class="badge-status">Cargando...</span>
+                </div>
+                <div class="card control-card">
+                    <h3>Acceso Remoto Forzado</h3>
+                    <button id="btn-abrir" class="btn-success">🔓 Forzar Apertura</button>
+                </div>
+            </section>
 
-        <section class="card control-card">
-            <h3>Acceso Remoto Forzado</h3>
-            <p>Abre el Rack de manera remota omitiendo temporalmente los factores biométricos.</p>
-            <button id="btn-abrir" class="btn-success">🔓 Forzar Apertura</button>
-        </section>
+            <section class="card admin-usuarios">
+                <h2>👥 Gestión de Identidades (Biometría + IA)</h2>
+                
+                <div class="form-group">
+                    <h3>Registrar Nuevo Usuario</h3>
+                    <input type="number" id="txt-id" placeholder="Asignar ID (1-127)" min="1" max="127">
+                    <input type="text" id="txt-nombre" placeholder="Nombre de la Persona">
+                    <button id="btn-registrar-usr" class="btn-primary">➕ Enviar Solicitud de Registro</button>
+                    <p class="nota-ayuda">Nota: Tras presionar, el ESP32 pedirá colocar el dedo dos veces.</p>
+                </div>
+
+                <h3>Usuarios en Base de Datos</h3>
+                <div class="tabla-contenedor">
+                    <table id="tabla-usuarios">
+                        <thead>
+                            <tr>
+                                <th>ID Sensor</th>
+                                <th>Nombre / Label IA</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="lista-usuarios-body">
+                            </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
     </main>
 
     <script src="app.js"></script>
