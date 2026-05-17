@@ -1,0 +1,13 @@
+{
+  "datacenter": {
+    "comandos": {
+      "rostroValido": false
+    },
+    "sensores": {
+      "gas": 0,
+      "humedad": 0,
+      "temperatura": 0,
+      "ventilador_estado": false
+    }
+  }
+}
