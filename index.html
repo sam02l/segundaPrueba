@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Datacenter SecurIA - Dashboard</title>
+    <title>CONTROL DE BODEGA - SECURITY IA</title>
     <link rel="manifest" href="manifest.json">
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
@@ -17,7 +17,6 @@
             --primary: #3b82f6;
             --success: #10b981;
             --danger: #ef4444;
-            --warning: #f59e0b;
         }
 
         body {
@@ -26,6 +25,7 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             padding: 20px;
+            text-transform: uppercase; /* ASEGURA MAYÚSCULAS GLOBALES EN LA INTERFAZ */
         }
 
         header {
@@ -37,14 +37,13 @@
             margin-bottom: 25px;
         }
 
-        h1 { font-size: 1.6rem; margin: 0; display: flex; align-items: center; gap: 10px; }
+        h1 { font-size: 1.4rem; margin: 0; letter-spacing: 1px; }
         
         .badge {
             padding: 6px 14px;
             border-radius: 20px;
             font-size: 0.8rem;
             font-weight: bold;
-            text-transform: uppercase;
         }
         .online { background-color: rgba(16, 185, 129, 0.2); color: var(--success); border: 1px solid var(--success); }
 
@@ -91,21 +90,20 @@
             border-radius: 12px;
             text-align: center;
         }
-        .sensor-box h3 { margin: 0; font-size: 0.9rem; color: var(--text-muted); }
+        .sensor-box h3 { margin: 0; font-size: 0.85rem; color: var(--text-muted); }
         .sensor-box .valor { font-size: 1.8rem; font-weight: bold; margin: 10px 0 5px 0; }
 
         .badge-status {
             display: inline-block;
-            padding: 3px 8px;
+            padding: 4px 10px;
             border-radius: 6px;
             font-size: 0.75rem;
             font-weight: bold;
         }
 
-        /* Formulario e Inputs */
-        .admin-section h2 { margin-top: 0; font-size: 1.3rem; color: var(--primary); border-bottom: 1px solid var(--card-border); padding-bottom: 10px; }
+        .admin-section h2 { margin-top: 0; font-size: 1.2rem; color: var(--primary); border-bottom: 1px solid var(--card-border); padding-bottom: 10px; }
         .input-group { margin-bottom: 15px; }
-        .input-group label { display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px; }
+        .input-group label { display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 5px; }
         
         input {
             width: 100%;
@@ -116,7 +114,7 @@
             border-radius: 8px;
             box-sizing: border-box;
             font-size: 0.95rem;
-            transition: border 0.2s;
+            text-transform: uppercase;
         }
         input:focus { border-color: var(--primary); outline: none; }
 
@@ -125,24 +123,22 @@
             padding: 12px;
             border: none;
             border-radius: 8px;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.2s;
+            text-transform: uppercase;
         }
         .btn-primary { background-color: var(--primary); color: white; }
         .btn-primary:hover { background-color: #2563eb; }
-        .btn-success { background-color: var(--success); color: white; }
-        .btn-success:hover { background-color: #059669; }
         .btn-danger { background-color: var(--danger); color: white; }
         .btn-danger:hover { background-color: #dc2626; }
-        .btn-sm { padding: 6px 12px; width: auto; font-size: 0.8rem; }
+        .btn-sm { padding: 6px 12px; width: auto; font-size: 0.75rem; }
 
-        /* Tablas */
         table { width: 100%; border-collapse: collapse; margin-top: 15px; }
         th, td { padding: 12px; text-align: left; border-bottom: 1px solid var(--card-border); }
-        th { color: var(--text-muted); font-size: 0.85rem; font-weight: 600; }
-        td { font-size: 0.95rem; }
+        th { color: var(--text-muted); font-size: 0.8rem; font-weight: 600; }
+        td { font-size: 0.9rem; }
 
         .hidden { display: none !important; }
 
@@ -156,67 +152,62 @@
 <body>
 
     <header>
-        <h1>🔐 Datacenter SecurIA</h1>
-        <span id="status-cloud" class="badge online">Online</span>
+        <h1>🔐 Sguridad Bodega - Inteligencia Artificial</h1>
+        <span id="status-cloud" class="badge online">Conectado</span>
     </header>
 
     <div class="dashboard-layout">
         
         <div class="left-column">
             <section id="panel-alerta" class="alert-card hidden">
-                <h2>⚠️ ¡SISTEMA BLOQUEADO!</h2>
-                <p style="margin: 0 0 15px 0; color: var(--text-muted);">Se detectaron 3 intentos fallidos de acceso biométrico en el rack.</p>
-                <button id="btn-desbloquear" class="btn-danger">Restablecer Sistema</button>
+                <h2>⚠️ ¡PUERTA BLOQUEADA POR SEGURIDAD!</h2>
+                <p style="margin: 0 0 15px 0; color: var(--text-muted); font-size: 0.85rem;">SE DETECTO UN INTRUSO O INTENTOS FALLIDOS EN EL ACCESO BIOMETRICO.</p>
+                <button id="btn-desbloquear" class="btn-danger">RESTABLECER ACCESO</button>
             </section>
 
             <section class="card">
-                <h2 style="margin-top:0; font-size:1.1rem; color:var(--text-muted);">Estado Ambiental</h2>
+                <h2 style="margin-top:0; font-size:1rem; color:var(--text-muted); letter-spacing: 0.5px;">MONITOREO AMBIENTAL DE BODEGA</h2>
                 <div class="telemetria-grid">
                     <div class="sensor-box">
-                        <h3>Temperatura</h3>
+                        <h3>TEMPERATURA</h3>
                         <p class="valor"><span id="lbl-temp">--</span>°C</p>
                     </div>
                     <div class="sensor-box">
-                        <h3>Humedad</h3>
+                        <h3>HUMEDAD</h3>
                         <p class="valor"><span id="lbl-hum">--</span>%</p>
                     </div>
                     <div class="sensor-box">
-                        <h3>Aire (Gas)</h3>
-                        <p class="valor" style="font-size: 1.4rem; margin: 15px 0 10px 0;"><span id="lbl-gas">--</span></p>
-                        <span id="badge-gas" class="badge-status">Cargando</span>
+                        <h3>CALIDAD AIRE</h3>
+                        <p class="valor" style="font-size: 1.3rem; margin: 15px 0 10px 0;"><span id="lbl-gas">--</span></p>
+                        <span id="badge-gas" class="badge-status">CARGANDO</span>
                     </div>
                 </div>
-            </section>
-
-            <section class="card">
-                <h2 style="margin-top:0; font-size:1.1rem; color:var(--text-muted);">Comando Remoto</h2>
-                <button id="btn-abrir" class="btn-success">🔓 Forzar Apertura de Rack</button>
             </section>
         </div>
 
         <section class="card admin-section">
-            <h2>👥 Gestión de Identidades (Biometría + IA)</h2>
+            <h2>👥 CONTROL DE IDENTIDADES (BIOMETRIA + IA)</h2>
             
             <div style="background: rgba(255,255,255,0.01); padding: 15px; border-radius: 12px; border: 1px solid var(--card-border);">
-                <h3 style="margin-top:0; font-size:0.95rem; color: var(--text-main);">Vincular Nuevo Usuario</h3>
+                <h3 style="margin-top:0; font-size:0.9rem; color: var(--text-main);">VINCULAR NUEVO OPERADOR</h3>
                 <div class="input-group">
-                    <label>ID del Espacio en Lector (1-127)</label>
-                    <input type="number" id="txt-id" placeholder="Ej. 2" min="1" max="127">
+                    <label>ID ASIGNADO EN SENSOR (1-127)</label>
+                    <input type="number" id="txt-id" placeholder="EJ. 2" min="1" max="127">
                 </div>
                 <div class="input-group">
-                    <label>Nombre Completo (Igual que etiqueta de IA)</label>
-                    <input type="text" id="txt-nombre" placeholder="Ej. Juan Perez">
+                    <label>NOMBRE DEL OPERADOR (IGUAL A LA ETIQUETA IA)</label>
+                    <input type="text" id="txt-nombre" placeholder="EJ. JUAN PEREZ">
                 </div>
-                <button id="btn-registrar-usr" class="btn-primary">➕ Enviar Orden de Enrolamiento</button>
+                <button id="btn-registrar-usr" class="btn-primary">➕ ENVIAR SOLICITUD DE ENROLAMIENTO</button>
             </div>
 
-            <h3 style="margin: 20px 0 10px 0; font-size:1rem;">Base de Datos Sincronizada</h3>
+            <h3 style="margin: 20px 0 10px 0; font-size:0.95rem; color: var(--text-muted);">OPERADORES AUTORIZADOS EN NUBE</h3>
             <table id="tabla-usuarios">
                 <thead>
                     <tr>
-                        <th>ID Hardware</th>
-                        <th>Identidad (IA Label)</th>
-                        <th>Acción</th>
+                        <th>ID SENSOR</th>
+                        <th>OPERADOR (LABEL IA)</th>
+                        <th>ACCION</th>
                     </tr>
                 </thead>
                 <tbody id="lista-usuarios-body">
