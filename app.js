@@ -162,3 +162,43 @@ rUsuarios.on('value', (snapshot) => {
         listaUsuariosBody.innerHTML = `<tr><td colspan="3" style="text-align:center; color:var(--text-muted);">Sin operadores registrados</td></tr>`;
     }
 });
+// Referencia al nuevo nodo de logs
+const rHistorial = database.ref('/datacenter/historial');
+const listaHistorialBody = document.getElementById('lista-historial-body');
+
+// ESCUCHAR EN TIEMPO REAL EL HISTORIAL (Muestra los últimos 30 eventos)
+rHistorial.limitToLast(30).on('value', (snapshot) => {
+    listaHistorialBody.innerHTML = "";
+    const logs = snapshot.val();
+    
+    if (logs) {
+        // Invertimos el orden para que los accesos más recientes aparezcan arriba de la tabla
+        const llavesInvertidas = Object.keys(logs).reverse();
+        
+        llavesInvertidas.forEach((key) => {
+            const log = logs[key];
+            const fila = document.createElement('tr');
+            
+            // Estilo dinámico de color dependiendo del tipo de evento (Éxito o Alerta)
+            let colorTexto = "var(--text-main)";
+            let badgeEstilo = "";
+            if (log.tipo === "danger") {
+                colorTexto = "#f87171"; // Rojo suave
+                badgeEstilo = "style='background: #7f1d1d; color: #fca5a5; border: 1px solid #b91c1c;'";
+            } else if (log.tipo === "success") {
+                colorTexto = "#34d399"; // Verde suave
+                badgeEstilo = "style='background: #064e3b; color: #a7f3d0; border: 1px solid #047857;'";
+            }
+
+            fila.innerHTML = `
+                <td style="color: var(--text-muted); font-size: 0.85rem; padding: 10px;">${log.fecha}</td>
+                <td style="color: ${colorTexto}; font-weight: bold;">${log.usuario}</td>
+                <td><span class="badge-id">${log.id_sensor > 0 ? log.id_sensor : 'N/A'}</span></td>
+                <td><span class="badge" ${badgeEstilo}>${log.evento}</span></td>
+            `;
+            listaHistorialBody.appendChild(fila);
+        });
+    } else {
+        listaHistorialBody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:var(--text-muted); padding: 15px;">No hay registros de acceso en la base de datos</td></tr>`;
+    }
+});
