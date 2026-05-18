@@ -217,6 +217,25 @@
 
     </div>
 
+    <div class="card admin-usuarios" style="margin-top: 20px;">
+    <h2>📜 HISTORIAL DE ACCESOS Y AUDITORÍA</h2>
+    <div style="max-height: 350px; overflow-y: auto; border: 1px solid var(--card-border); border-radius: 8px;">
+        <table id="tabla-historial" style="width: 100%; border-collapse: collapse;">
+            <thead style="position: sticky; top: 0; background: var(--card-bg); z-index: 10;">
+                <tr>
+                    <th>FECHA / HORA</th>
+                    <th>OPERADOR</th>
+                    <th>ID</th>
+                    <th>EVENTO REGISTRADO</th>
+                </tr>
+            </thead>
+            <tbody id="lista-historial-body">
+                <tr><td colspan="4" style="text-align:center; color:var(--text-muted);">Cargando logs del servidor...</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
     <script src="app.js"></script>
 </body>
 </html>
