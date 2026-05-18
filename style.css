@@ -31,3 +31,17 @@ th, td { padding: 10px; border-bottom: 1px solid #334155; font-size: 0.9rem; }
 th { color: #94a3b8; }
 td { color: white; }
 .tabla-contenedor { max-height: 250px; overflow-y: auto; }
+/* Agrega esto al final de tu archivo style.css */
+.badge-id {
+    background: #1e293b;
+    border: 1px solid #334155;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    color: #3b82f6;
+}
+
+#panel-estado-2fa {
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
