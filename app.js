@@ -18,7 +18,7 @@ const lblGas = document.getElementById('lbl-gas');
 const badgeGas = document.getElementById('badge-gas');
 const panelAlerta = document.getElementById('panel-alerta');
 const btnDesbloquear = document.getElementById('btn-desbloquear');
-const btnAbrir = document.getElementById('btn-abrir');
+//const btnAbrir = document.getElementById('btn-abrir');
 
 // Elementos Administración
 const txtId = document.getElementById('txt-id');
@@ -46,7 +46,7 @@ rAlertas.on('value', (snapshot) => {
 });
 
 btnDesbloquear.addEventListener('click', () => rAlertas.update({ intruso: false }));
-btnAbrir.addEventListener('click', () => {
+//btnAbrir.addEventListener('click', () => {
     rComandos.update({ rostroValido: true });
     setTimeout(() => { rComandos.update({ rostroValido: false }); }, 3000);
 });
